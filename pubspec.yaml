@@ -1,6 +1,6 @@
 name: wanigo_ui
 description: Package untuk global styles dan reusable widgets aplikasi WANIGO!
-version: 0.0.1
+version: 0.0.2
 homepage: https://github.com/WANIGO
 repository: https://github.com/WANIGO/wanigo_ui
 
@@ -21,7 +21,7 @@ dev_dependencies:
 flutter:
   assets:
     - assets/images/
-    
+
   fonts:
     - family: NunitoSans
       fonts:

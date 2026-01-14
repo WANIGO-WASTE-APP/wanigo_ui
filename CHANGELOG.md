@@ -38,7 +38,7 @@ For the initial release, no upgrade steps are required. Just add the dependency 
 
 ```yaml
 dependencies:
-  wanigo_ui: ^0.0.1
+  wanigo_ui: ^0.0.2
 ```
 
 ## Coming Soon
