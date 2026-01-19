@@ -100,7 +100,7 @@ class GlobalModal extends StatelessWidget {
                 onPressed: onSecondaryButtonPressed ??
                     () => Navigator.of(context).pop(),
                 isFullWidth: true,
-                variant: ButtonVariant.small,
+                variant: ButtonVariant.medium,
               ),
             ],
           ],

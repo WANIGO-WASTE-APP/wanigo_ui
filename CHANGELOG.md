@@ -33,12 +33,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Tab menu system with flexible configuration options
 - Comprehensive color system with shades for blue, orange, gray, red, and green
 
+## [0.0.3] - 2026-01-20
+
+### Added
+- `GlobalModal` change secondary button to outline style
+- `GlobalButton` add button variant outline style
+
+
 ## How to upgrade
 For the initial release, no upgrade steps are required. Just add the dependency to your pubspec.yaml:
 
 ```yaml
 dependencies:
-  wanigo_ui: ^0.0.2
+  wanigo_ui: ^0.0.3
 ```
 
 ## Coming Soon
