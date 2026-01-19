@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.0.1] - 2025-04-23
 
 ### Added
+
 - Initial release of Wanigo UI package
 - Core components:
   - `GlobalText` with multiple variants for typography system (headings, body text with various weights)
@@ -25,6 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `AppTheme` for theme configuration
 
 ### Features
+
 - Typography system with multiple text variants (heading, body) and weights (regular, medium, semiBold, bold, extraBold)
 - Button system with multiple styles (primary, secondary, tertiary) and sizes (xsmall, small, medium, large)
 - Input fields with proper styling for regular, focused, disabled, and error states
@@ -36,19 +38,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.0.3] - 2026-01-20
 
 ### Added
-- `GlobalModal` change secondary button to outline style
-- `GlobalButton` add button variant outline style
 
+- `GlobalModal` change secondary button to outline style
+- `GlobalButton` add button variant outline style'
+
+### Added
+
+- `GlobalModal` change secondary button size to medium
 
 ## How to upgrade
+
 For the initial release, no upgrade steps are required. Just add the dependency to your pubspec.yaml:
 
 ```yaml
 dependencies:
-  wanigo_ui: ^0.0.3
+  wanigo_ui: ^0.0.4
 ```
 
 ## Coming Soon
+
 - Enhanced theming capabilities
 - More specialized input fields (date pickers, etc.)
 - Form validation helpers
