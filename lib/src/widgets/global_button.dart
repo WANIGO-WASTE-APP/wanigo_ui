@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:wanigo_ui/src/texts/global_text.dart';
+import 'package:wanigo_ui/src/core/global_style/global_color.dart';
 
 /// A global button component that provides consistent button styling
 /// based on the design system.
@@ -47,7 +48,7 @@ class GlobalButton extends StatelessWidget {
     this.iconColor,
     this.buttonState = ButtonState.default_,
   }) : assert(shape == ButtonShape.circle ? text == null : true,
-           'Text should be null for circle buttons');
+            'Text should be null for circle buttons');
 
   factory GlobalButton.withChevron({
     required String text,
@@ -90,7 +91,7 @@ class GlobalButton extends StatelessWidget {
     VoidCallback? onPressed,
     bool isLoading = false,
     Color? backgroundColor,
-    Color? iconColor, 
+    Color? iconColor,
     bool disabled = false,
     bool showChevron = true,
     ButtonState buttonState = ButtonState.default_,
@@ -145,6 +146,41 @@ class GlobalButton extends StatelessWidget {
     );
   }
 
+  factory GlobalButton.outline({
+    required String text,
+    required ButtonVariant variant,
+    VoidCallback? onPressed,
+    bool isLoading = false,
+    bool isFullWidth = true,
+    BorderRadius? borderRadius,
+    EdgeInsets? padding,
+    TextVariant textVariant = TextVariant.mediumSemiBold,
+    bool disabled = false,
+    ButtonState buttonState = ButtonState.default_,
+    Widget? prefix,
+    Widget? suffix,
+    double? gap,
+    bool showChevron = false,
+  }) {
+    return GlobalButton(
+      text: text,
+      variant: variant,
+      style: ButtonStyle.outline,
+      onPressed: onPressed,
+      isLoading: isLoading,
+      isFullWidth: isFullWidth,
+      borderRadius: borderRadius,
+      padding: padding,
+      textVariant: textVariant,
+      disabled: disabled,
+      buttonState: buttonState,
+      prefix: prefix,
+      suffix: suffix,
+      gap: gap,
+      showChevron: showChevron,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     // Determine size based on variant and shape
@@ -155,32 +191,32 @@ class GlobalButton extends StatelessWidget {
 
     switch (variant) {
       case ButtonVariant.xsmall:
-        width = shape == ButtonShape.circle 
-            ? 32.w 
+        width = shape == ButtonShape.circle
+            ? 32.w
             : (isFullWidth ? double.infinity : null);
         height = shape == ButtonShape.circle ? 32.h : 32.h;
         iconSize = 12.w;
         effectiveTextVariant = TextVariant.xSmallSemiBold;
         break;
       case ButtonVariant.small:
-        width = shape == ButtonShape.circle 
-            ? 40.w 
+        width = shape == ButtonShape.circle
+            ? 40.w
             : (isFullWidth ? double.infinity : null);
         height = shape == ButtonShape.circle ? 40.h : 40.h;
         iconSize = 14.w;
         effectiveTextVariant = TextVariant.smallSemiBold;
         break;
       case ButtonVariant.medium:
-        width = shape == ButtonShape.circle 
-            ? 48.w 
+        width = shape == ButtonShape.circle
+            ? 48.w
             : (isFullWidth ? double.infinity : null);
         height = shape == ButtonShape.circle ? 48.h : 48.h;
         iconSize = 16.w;
         effectiveTextVariant = TextVariant.mediumSemiBold;
         break;
       case ButtonVariant.large:
-        width = shape == ButtonShape.circle 
-            ? 52.w 
+        width = shape == ButtonShape.circle
+            ? 52.w
             : (isFullWidth ? double.infinity : null);
         height = shape == ButtonShape.circle ? 52.h : 52.h;
         iconSize = 18.w;
@@ -192,7 +228,7 @@ class GlobalButton extends StatelessWidget {
     final Color effectiveBackgroundColor = _getBackgroundColor();
     final Color effectiveTextColor = _getTextColor();
     final Color effectiveIconColor = iconColor ?? effectiveTextColor;
-    
+
     // Get box shadow based on state
     final List<BoxShadow>? boxShadow = _getBoxShadow();
 
@@ -204,9 +240,10 @@ class GlobalButton extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           backgroundColor: effectiveBackgroundColor,
           disabledBackgroundColor: _getDisabledBackgroundColor(),
-          padding: shape == ButtonShape.circle 
-              ? EdgeInsets.zero 
-              : (padding ?? EdgeInsets.symmetric(vertical: 8.h, horizontal: 16.w)),
+          padding: shape == ButtonShape.circle
+              ? EdgeInsets.zero
+              : (padding ??
+                  EdgeInsets.symmetric(vertical: 8.h, horizontal: 16.w)),
           shape: shape == ButtonShape.circle
               ? const CircleBorder()
               : RoundedRectangleBorder(
@@ -215,16 +252,22 @@ class GlobalButton extends StatelessWidget {
           elevation: 0,
           shadowColor: Colors.transparent,
           surfaceTintColor: Colors.transparent,
+          side: style == ButtonStyle.outline
+              ? BorderSide(color: Color(0xFFDFE1E7), width: 1.w)
+              : null,
         ).copyWith(
           shadowColor: const MaterialStatePropertyAll(Colors.transparent),
           elevation: const MaterialStatePropertyAll(0),
           overlayColor: MaterialStateProperty.resolveWith<Color?>((states) {
             if (states.contains(MaterialState.hovered)) {
               // Different hover colors based on button style
-              if (style == ButtonStyle.tertiary) {
-                return const Color(0xFFE8E9EC); // Lighter hover for tertiary
+              if (style == ButtonStyle.tertiary ||
+                  style == ButtonStyle.outline) {
+                return const Color(
+                    0xFFE8E9EC); // Lighter hover for tertiary/outline
               }
-              return const Color(0xFF052D76); // Blue-800 for hover state (primary)
+              return const Color(
+                  0xFF052D76); // Blue-800 for hover state (primary)
             }
             return null; // Use default overlay color
           }),
@@ -235,8 +278,10 @@ class GlobalButton extends StatelessWidget {
                 return _getDisabledBackgroundColor();
               }
               if (states.contains(MaterialState.hovered)) {
-                if (style == ButtonStyle.tertiary) {
-                  return const Color(0xFFE8E9EC); // Lighter hover for tertiary
+                if (style == ButtonStyle.tertiary ||
+                    style == ButtonStyle.outline) {
+                  return const Color(
+                      0xFFE8E9EC); // Lighter hover for tertiary/outline
                 }
                 return const Color(0xFF052D76); // Blue-800 for hover (primary)
               }
@@ -247,8 +292,8 @@ class GlobalButton extends StatelessWidget {
         child: DecoratedBox(
           decoration: BoxDecoration(
             boxShadow: boxShadow,
-            borderRadius: shape == ButtonShape.circle 
-                ? null 
+            borderRadius: shape == ButtonShape.circle
+                ? null
                 : (borderRadius ?? BorderRadius.circular(10.r)),
           ),
           child: isLoading
@@ -258,7 +303,8 @@ class GlobalButton extends StatelessWidget {
                     strokeWidth: 3,
                   ),
                 )
-              : _buildButtonContent(iconSize, effectiveTextVariant, effectiveTextColor, effectiveIconColor),
+              : _buildButtonContent(iconSize, effectiveTextVariant,
+                  effectiveTextColor, effectiveIconColor),
         ),
       ),
     );
@@ -271,7 +317,7 @@ class GlobalButton extends StatelessWidget {
     if (disabled) {
       return _getDisabledBackgroundColor();
     }
-    
+
     // Get color based on style and state
     switch (style) {
       case ButtonStyle.primary:
@@ -289,6 +335,8 @@ class GlobalButton extends StatelessWidget {
         return Colors.white; // White background for secondary
       case ButtonStyle.tertiary:
         return const Color(0xFFF6F8FA); // Grey background F6F8FA
+      case ButtonStyle.outline:
+        return Colors.white;
     }
   }
 
@@ -297,9 +345,13 @@ class GlobalButton extends StatelessWidget {
       case ButtonStyle.primary:
         return const Color(0xFFADC8F8); // Blue-200 for disabled primary
       case ButtonStyle.secondary:
-        return Colors.white.withAlpha(179); // Semi-transparent white for disabled secondary (0.7 * 255 = 179)
+        return Colors.white.withAlpha(
+            179); // Semi-transparent white for disabled secondary (0.7 * 255 = 179)
       case ButtonStyle.tertiary:
-        return const Color(0xFFF6F8FA).withAlpha(179); // Semi-transparent grey for disabled tertiary (0.7 * 255 = 179)
+        return const Color(0xFFF6F8FA).withAlpha(
+            179); // Semi-transparent grey for disabled tertiary (0.7 * 255 = 179)
+      case ButtonStyle.outline:
+        return Colors.white.withAlpha(179);
     }
   }
 
@@ -312,9 +364,13 @@ class GlobalButton extends StatelessWidget {
         case ButtonStyle.primary:
           return Colors.white.withAlpha(179); // 0.7 * 255 = 179
         case ButtonStyle.secondary:
-          return const Color(0xFF6B6F70).withAlpha(179); // Grey-500 semi-transparent
+          return const Color(0xFF6B6F70)
+              .withAlpha(179); // Grey-500 semi-transparent
         case ButtonStyle.tertiary:
-          return const Color(0xFF6B6F70).withAlpha(179); // Grey-500 semi-transparent
+          return const Color(0xFF6B6F70)
+              .withAlpha(179); // Grey-500 semi-transparent
+        case ButtonStyle.outline:
+          return AppColors.blue600.withAlpha(179);
       }
     }
 
@@ -325,6 +381,8 @@ class GlobalButton extends StatelessWidget {
         return const Color(0xFF0A5AEB); // Blue-500
       case ButtonStyle.tertiary:
         return const Color(0xFF6B6F70); // Grey-500
+      case ButtonStyle.outline:
+        return AppColors.blue600;
     }
   }
 
@@ -356,11 +414,12 @@ class GlobalButton extends StatelessWidget {
         ),
       ];
     }
-    
+
     return null; // No shadow for default and disabled states
   }
 
-  Widget _buildButtonContent(double iconSize, TextVariant effectiveTextVariant, Color textColor, Color iconColor) {
+  Widget _buildButtonContent(double iconSize, TextVariant effectiveTextVariant,
+      Color textColor, Color iconColor) {
     // For circle buttons, just show the chevron icon
     if (shape == ButtonShape.circle) {
       return Icon(
@@ -427,4 +486,5 @@ enum ButtonStyle {
   primary,
   secondary,
   tertiary,
+  outline,
 }

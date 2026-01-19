@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:wanigo_ui/src/texts/global_text.dart';
 import 'package:wanigo_ui/src/widgets/global_button.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:wanigo_ui/wanigo_ui.dart';
 
 /// A global modal component for displaying notifications, confirmations, or alerts.
 class GlobalModal extends StatelessWidget {
@@ -59,7 +61,7 @@ class GlobalModal extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             if (imagePath != null) ...[
-              Image.asset(
+              SvgPicture.asset(
                 imagePath!,
                 width: imageSize ?? 100.r,
                 height: imageSize ?? 100.r,
@@ -71,6 +73,7 @@ class GlobalModal extends StatelessWidget {
               GlobalText(
                 text: title!,
                 variant: TextVariant.h4,
+                color: AppColors.gray600,
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: gap ?? 9.28.h),
@@ -79,6 +82,7 @@ class GlobalModal extends StatelessWidget {
               GlobalText(
                 text: message!,
                 variant: TextVariant.mediumMedium,
+                color: AppColors.gray600,
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: gap ?? 9.28.h * 2),
@@ -87,19 +91,16 @@ class GlobalModal extends StatelessWidget {
               text: primaryButtonText,
               onPressed: onPrimaryButtonPressed,
               isFullWidth: true,
-              variant: ButtonVariant.medium, // Tambahkan varian
+              variant: ButtonVariant.medium,
             ),
             if (secondaryButtonText != null) ...[
               SizedBox(height: gap ?? 9.28.h),
-              GlobalButton(
+              GlobalButton.outline(
                 text: secondaryButtonText!,
                 onPressed: onSecondaryButtonPressed ??
                     () => Navigator.of(context).pop(),
                 isFullWidth: true,
-                backgroundColor: Colors.white,
-                textColor: Colors.blue,
-                borderRadius: BorderRadius.circular(10.r),
-                variant: ButtonVariant.small, // Tambahkan varian
+                variant: ButtonVariant.small,
               ),
             ],
           ],
