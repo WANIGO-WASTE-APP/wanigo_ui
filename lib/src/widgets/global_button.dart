@@ -181,6 +181,41 @@ class GlobalButton extends StatelessWidget {
     );
   }
 
+  factory GlobalButton.subtle({
+    required String text,
+    required ButtonVariant variant,
+    VoidCallback? onPressed,
+    bool isLoading = false,
+    bool isFullWidth = true,
+    BorderRadius? borderRadius,
+    EdgeInsets? padding,
+    TextVariant textVariant = TextVariant.mediumSemiBold,
+    bool disabled = false,
+    ButtonState buttonState = ButtonState.default_,
+    Widget? prefix,
+    Widget? suffix,
+    double? gap,
+    bool showChevron = false,
+  }) {
+    return GlobalButton(
+      text: text,
+      variant: variant,
+      style: ButtonStyle.subtle,
+      onPressed: onPressed,
+      isLoading: isLoading,
+      isFullWidth: isFullWidth,
+      borderRadius: borderRadius,
+      padding: padding,
+      textVariant: textVariant,
+      disabled: disabled,
+      buttonState: buttonState,
+      prefix: prefix,
+      suffix: suffix,
+      gap: gap,
+      showChevron: showChevron,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     // Determine size based on variant and shape
@@ -262,9 +297,10 @@ class GlobalButton extends StatelessWidget {
             if (states.contains(MaterialState.hovered)) {
               // Different hover colors based on button style
               if (style == ButtonStyle.tertiary ||
-                  style == ButtonStyle.outline) {
+                  style == ButtonStyle.outline ||
+                  style == ButtonStyle.subtle) {
                 return const Color(
-                    0xFFE8E9EC); // Lighter hover for tertiary/outline
+                    0xFFE8E9EC); // Lighter hover for tertiary/outline/subtle
               }
               return const Color(
                   0xFF052D76); // Blue-800 for hover state (primary)
@@ -279,9 +315,10 @@ class GlobalButton extends StatelessWidget {
               }
               if (states.contains(MaterialState.hovered)) {
                 if (style == ButtonStyle.tertiary ||
-                    style == ButtonStyle.outline) {
+                    style == ButtonStyle.outline ||
+                    style == ButtonStyle.subtle) {
                   return const Color(
-                      0xFFE8E9EC); // Lighter hover for tertiary/outline
+                      0xFFE8E9EC); // Lighter hover for tertiary/outline/subtle
                 }
                 return const Color(0xFF052D76); // Blue-800 for hover (primary)
               }
@@ -376,7 +413,7 @@ class GlobalButton extends StatelessWidget {
         case ButtonStyle.outline:
           return AppColors.blue600.withAlpha(179);
         case ButtonStyle.subtle:
-          return AppColors.blue600;
+          return AppColors.blue600.withAlpha(179);
       }
     }
 
@@ -390,7 +427,7 @@ class GlobalButton extends StatelessWidget {
       case ButtonStyle.outline:
         return AppColors.blue600;
       case ButtonStyle.subtle:
-        return AppColors.blue100; 
+        return AppColors.blue600;
     }
   }
 
