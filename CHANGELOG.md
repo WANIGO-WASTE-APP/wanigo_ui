@@ -55,13 +55,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - `GlobalButton` add button variant subtle button'
 
+## [0.0.6] - 2026-02-03
+
+### Added
+
+- `GlobalButton` add factory subtle button'
+
 ## How to upgrade
 
 For the initial release, no upgrade steps are required. Just add the dependency to your pubspec.yaml:
 
 ```yaml
 dependencies:
-  wanigo_ui: ^0.0.5
+  wanigo_ui: ^0.0.6
 ```
 
 ## Coming Soon
