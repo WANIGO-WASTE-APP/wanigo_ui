@@ -42,9 +42,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `GlobalModal` change secondary button to outline style
 - `GlobalButton` add button variant outline style'
 
+
+## [0.0.4] - 2026-01-20
+
 ### Added
 
 - `GlobalModal` change secondary button size to medium
+
+## [0.0.5] - 2026-02-03
+
+### Added
+
+- `GlobalButton` add button variant subtle button'
 
 ## How to upgrade
 
@@ -52,7 +61,7 @@ For the initial release, no upgrade steps are required. Just add the dependency 
 
 ```yaml
 dependencies:
-  wanigo_ui: ^0.0.4
+  wanigo_ui: ^0.0.5
 ```
 
 ## Coming Soon

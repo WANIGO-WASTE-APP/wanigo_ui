@@ -337,6 +337,8 @@ class GlobalButton extends StatelessWidget {
         return const Color(0xFFF6F8FA); // Grey background F6F8FA
       case ButtonStyle.outline:
         return Colors.white;
+      case ButtonStyle.subtle:
+        return AppColors.blue100;
     }
   }
 
@@ -352,6 +354,8 @@ class GlobalButton extends StatelessWidget {
             179); // Semi-transparent grey for disabled tertiary (0.7 * 255 = 179)
       case ButtonStyle.outline:
         return Colors.white.withAlpha(179);
+      case ButtonStyle.subtle:
+        return AppColors.blue100;
     }
   }
 
@@ -371,6 +375,8 @@ class GlobalButton extends StatelessWidget {
               .withAlpha(179); // Grey-500 semi-transparent
         case ButtonStyle.outline:
           return AppColors.blue600.withAlpha(179);
+        case ButtonStyle.subtle:
+          return AppColors.blue600;
       }
     }
 
@@ -383,6 +389,8 @@ class GlobalButton extends StatelessWidget {
         return const Color(0xFF6B6F70); // Grey-500
       case ButtonStyle.outline:
         return AppColors.blue600;
+      case ButtonStyle.subtle:
+        return AppColors.blue100; 
     }
   }
 
@@ -487,4 +495,5 @@ enum ButtonStyle {
   secondary,
   tertiary,
   outline,
+  subtle,
 }
